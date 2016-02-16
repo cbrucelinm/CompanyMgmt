@@ -37,6 +37,8 @@ import com.loa.common.properties.PropertyUtil;
     	
     	public static Connection getConnection() {
     		try {
+    			System.out.println("abc");
+    			System.out.println("xyz : " + DatabaseUrl.extract().getConnection());
     			return DatabaseUrl.extract().getConnection();
 				//return DriverManager.getConnection(prop.getProperty("jdbc.url" ), prop.getProperty("jdbc.username"), prop.getProperty("jdbc.password"));
 			} catch (Exception e) {
