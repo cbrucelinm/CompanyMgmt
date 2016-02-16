@@ -1,14 +1,16 @@
 package com.loa.common.db;
 
  	import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
+//import java.sql.DriverManager;
+//import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
+//import java.sql.Statement;
 import java.util.Properties;
     
 
 
+
+import com.heroku.sdk.jdbc.DatabaseUrl;
 import com.loa.common.properties.PropertyUtil;
     
     public class DBUtil {
@@ -17,7 +19,7 @@ import com.loa.common.properties.PropertyUtil;
     	
     	static {
     		try {
-    			init();
+    			//init();
     			
     		} catch (Exception e ) {
     			e.printStackTrace();
@@ -35,8 +37,9 @@ import com.loa.common.properties.PropertyUtil;
     	
     	public static Connection getConnection() {
     		try {
-				return DriverManager.getConnection(prop.getProperty("jdbc.url" ), prop.getProperty("jdbc.username"), prop.getProperty("jdbc.password"));
-			} catch (SQLException e) {
+    			return DatabaseUrl.extract().getConnection();
+				//return DriverManager.getConnection(prop.getProperty("jdbc.url" ), prop.getProperty("jdbc.username"), prop.getProperty("jdbc.password"));
+			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}

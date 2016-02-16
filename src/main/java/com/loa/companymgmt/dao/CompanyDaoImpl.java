@@ -141,6 +141,7 @@ public class CompanyDaoImpl implements ICompanyDao {
 		List<Company> list = new ArrayList<Company>();
 		try {
 			conn = DBUtil.getConnection();
+			System.out.println("Connection : " + conn);
 			stmt = conn.prepareStatement("select id, name, address, city, country, email, phone, ctime,utime from company ORDER BY name, email ASC");
 			rs = stmt.executeQuery();
 			while (rs.next()) {
