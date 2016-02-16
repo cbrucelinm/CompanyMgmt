@@ -1,0 +1,128 @@
+<html lang="en" >
+<head>
+  <!-- Angular Material style sheet -->
+  <title>LOA Company Management</title>
+</head>
+<body>
+  <!--
+    Your HTML content here
+  -->  
+  <link rel="stylesheet"	href="resources/css/jquery-ui.css">
+  <link rel="stylesheet"	href="resources/css/angular-material.min.css">
+  <link rel="stylesheet"	href="resources/css/company/company.css">
+<script src="resources/js/jquery-1.11.2.min.js"></script>
+<script src="resources/js/jquery-ui.js"></script>
+  <!-- Angular Material requires Angular.js Libraries -->
+  <script src="resources/js/angular.min.js"></script>
+  <script src="resources/js/angular-animate.min.js"></script>
+  <script src="resources/js/angular-aria.min.js"></script>
+  <script src="resources/js/angular-messages.min.js"></script>
+
+  <!-- Angular Material Library -->
+  <script src="resources/js/angular-material.min.js"></script>
+  <script src="resources/js/company/company.js"></script>
+    <div id="fixedheader">
+		LOA Company Management
+	</div>
+	<div ng-app="CompanyApp" ng-controller="companyController" >
+  	<md-content>
+    <md-tabs md-dynamic-height md-border-bottom>
+      <md-tab label="Company" ng-click="setTab('Company');action='Add';loadCompanyList();clearForm()">
+      </md-tab>
+      <md-tab label="Beneficial Owner" ng-click="setTab('Beneficial Owner');action='Add';loadOwnerList();clearForm()">
+       
+      </md-tab>
+    </md-tabs>
+  	</md-content>
+   	<md-content class="md-padding">
+          <h3  >{{tab}}</h3>
+           <table class="formTab">
+			<tr>
+			  <td><label>Name :</label></td>
+			  <td><input type="text" id='name' value="{{ (tab == 'Company' && action=== 'Update') ? company.name :'' }}"/>  </td>
+			  <td><span ng-show="msg != '' && msg.Status " class="msg">{{msg.Status}}</span><span ng-show="msg != '' && msg.Error" class="error">{{msg.Error}}</span><span id="name_validation" class="error"></span></td>
+			  <td></td>
+			</tr>
+			<tr>
+			  <td><label>Address :</label></td>
+			  <td><input type="text" id='address' value="{{ (tab == 'Company' && action=== 'Update') ? company.address :'' }}"/></td>
+			  <td><span id="address_validation"  class="error"></span></td>
+			  <td></td>
+			</tr>
+			<tr>
+			  <td><label>City :</label></td>
+			  <td><input type="text" id='city'  value="{{ (tab == 'Company' && action=== 'Update') ? company.city :'' }}"/></td>
+			  <td><span id="city_validation"  class="error"></span></td>
+			  <td></td>
+			</tr>
+			<tr>
+			  <td><label>Country :</label></td>
+			  <td><input type="text" id='country' value="{{ (tab == 'Company' && action=== 'Update') ? company.country :'' }}"/></td>
+			  <td><span id="country_validation"  class="error"></span></td>
+			  <td></td>
+			</tr>
+			
+			<tr>
+			  <td><label>Email :</label></td>
+			  <td><input type="text" id='email' value="{{ (tab == 'Company' && action=== 'Update') ? company.email :'' }}"/></td>
+			  <td><span id="email_validation"  class="error"></span></td>
+			  <td></td>
+			</tr>
+			<tr>
+			  <td><label>Phone :</label></td>
+			  <td><input type="text" id="phone" value="{{ (tab == 'Company' && action=== 'Update') ? company.phone :'' }}"/></td>
+			  <td><span id="phone_validation"  class="error"></span></td>
+			  <td></td>
+			</tr>
+			<tr ng-show="tab != 'Company'">
+			  <td><label>Date of Birth :</label></td>
+			  <td><input type="text" id='dob'/></td>
+			  <td><span id="dobl_validationForOwner"  class="error"></span></td>
+			  <td></td>
+			</tr>
+			 <tr ng-show="tab == 'Company'">
+			  <td><label>Owner(s) :</label></td>
+			  <td><select id="ownerIds" size="4" multiple>
+							 	<option ng-repeat="owner in owners" value={{owner.id}}>{{owner.name}}({{owner.email}})</option>
+							 
+					</select></td>
+			   <td><span id="owners_validation"  class="error"></span></td>
+			 <td></td>
+			</tr>
+			<tr>
+			  <td> </td>
+			  <td> </td>
+			   <td><input type="button" class="MyButton" value="{{action}} {{tab}}" ng-click="submit()"/>
+			 </td>
+			  <td><input type="button" class="MyButton" value="Cancel" ng-click="clearForm()"/></td>
+			</tr>
+		</table>
+		<div id="user1">
+	<center>
+	<table class="detailTable">
+		<thead>
+			<tr>
+				<th>Name{{(tab != 'Company')?'(Email)':''}}</th>
+				 <th>Update</th>
+			 
+			</tr>
+		</thead>
+		<tbody  >
+			 	<tr ng-repeat="name in (tab == 'Company')?companies:owners">
+						<td>{{(tab == 'Company')?name:(name.name + "(" + name.email + ")" )}} </td>
+						  <td><input type="button" value="Update" ng-click="load((tab == 'Company')?name:(name.id))"/></td>
+					 
+				</tr>
+			 
+		</tbody>
+	</table>
+ 
+   
+   
+	</center>
+	</div> 
+		</md-content>
+	</div>
+	<div id="fixedfooter"></div>
+</body>
+</html>
